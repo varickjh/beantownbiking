@@ -2,6 +2,12 @@
 import mapboxgl from 'https://cdn.jsdelivr.net/npm/mapbox-gl@2.15.0/+esm';
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 
+let paintOptions = {
+    'line-color': '#32D400', // A bright green using hex code
+    'line-width': 4,         // Thicker lines
+    'line-opacity': 0.4      // Slightly less transparent
+  };
+  
 // Set your Mapbox access token here
 mapboxgl.accessToken = 'pk.eyJ1IjoidmFyaWNramgiLCJhIjoiY21hbjZsaDAyMGFoNDJscTlqbTd3OWhjNiJ9.1PS0lgZ-qiwiN34HFV0ieA';
 
@@ -84,12 +90,6 @@ map.on('load', async () => {
     type: 'geojson',
     data: ' https://raw.githubusercontent.com/cambridgegis/cambridgegis_data/main/Recreation/Bike_Facilities/RECREATION_BikeFacilities.geojson',
   });
-
-  let paintOptions = {
-    'line-color': '#32D400', // A bright green using hex code
-    'line-width': 4,         // Thicker lines
-    'line-opacity': 0.4      // Slightly less transparent
-  };
   map.addLayer({
     id: 'bike-lanes-boston',
     type: 'line',
@@ -131,7 +131,7 @@ map.on('load', async () => {
       //This adds the trip to the correct index in `departuresByMinute` so that later we can efficiently retrieve all trips that started at a specific time.
       let endedMinutes = minutesSinceMidnight(trip.ended_at);
       arrivalsByMinute[endedMinutes].push(trip);
-      
+
       return trip;
     },
   );
